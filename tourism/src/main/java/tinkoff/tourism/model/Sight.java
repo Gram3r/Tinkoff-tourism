@@ -5,12 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import tinkoff.tourism.validation.SightConstraint;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @SightConstraint
-public abstract class Sight {
+public class Sight {
     private Long id;
     private String name;
     private Double xCoordinate;

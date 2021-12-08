@@ -5,7 +5,7 @@
 
 <mapper namespace="tinkoff.tourism.dao.MuseumRepository">
 
-    <insert id="addMuseum" parameterType="tinkoff.tourism.model.Museum">
+    <insert id="addSight" parameterType="tinkoff.tourism.model.Museum">
         INSERT INTO museums (name, xCoordinate, yCoordinate, description, siteLink, openHours, price, discountForChildren)
         VALUES (#{name}, #{xCoordinate}, #{yCoordinate}, #{description}, #{siteLink}, #{openHours}, #{price}, #{discountForChildren})
     </insert>
@@ -21,7 +21,7 @@
         WHERE museums.id = #{id}
     </select>
 
-    <update id="updateMuseum" parameterType="tinkoff.tourism.model.Museum">
+    <update id="updateSight" parameterType="tinkoff.tourism.model.Museum">
         UPDATE museums
         SET NAME        = #{name},
             XCOORDINATE = #{xCoordinate},

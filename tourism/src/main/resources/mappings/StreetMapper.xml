@@ -5,7 +5,7 @@
 
 <mapper namespace="tinkoff.tourism.dao.StreetRepository">
 
-    <insert id="addStreet" parameterType="tinkoff.tourism.model.Street">
+    <insert id="addSight" parameterType="tinkoff.tourism.model.Street">
         INSERT INTO streets (name, xCoordinate, yCoordinate, description, siteLink, openHours, price, history)
         VALUES (#{name}, #{xCoordinate}, #{yCoordinate}, #{description}, #{siteLink}, #{openHours}, #{price}, #{history})
     </insert>
@@ -21,7 +21,7 @@
         WHERE streets.id = #{id}
     </select>
 
-    <update id="updateStreet" parameterType="tinkoff.tourism.model.Street">
+    <update id="updateSight" parameterType="tinkoff.tourism.model.Street">
         UPDATE streets
         SET NAME        = #{name},
             XCOORDINATE = #{xCoordinate},

@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 public class SightService extends GenericService<Sight, SightRepository>  {
-
     public SightService(SightRepository repository) {
         super(repository);
     }

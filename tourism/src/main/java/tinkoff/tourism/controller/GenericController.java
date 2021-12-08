@@ -2,7 +2,6 @@ package tinkoff.tourism.controller;
 
 import org.springframework.web.bind.annotation.*;
 import tinkoff.tourism.model.Sight;
-import tinkoff.tourism.service.SightService;
 
 import javax.validation.Valid;
 import java.util.List;

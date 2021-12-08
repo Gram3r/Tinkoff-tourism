@@ -1,8 +1,6 @@
 package tinkoff.tourism.service;
 
-import tinkoff.tourism.dao.SightRepository;
 import tinkoff.tourism.model.Sight;
-
 import java.util.List;
 
 public interface IGenericService<T extends Sight>{

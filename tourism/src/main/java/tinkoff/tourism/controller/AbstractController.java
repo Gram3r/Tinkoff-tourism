@@ -1,13 +1,8 @@
 package tinkoff.tourism.controller;
 
 import org.springframework.web.bind.annotation.*;
-import tinkoff.tourism.dao.GenericRepository;
 import tinkoff.tourism.model.Sight;
-import tinkoff.tourism.service.CafeService;
-import tinkoff.tourism.service.GenericService;
 import tinkoff.tourism.service.IGenericService;
-import tinkoff.tourism.service.SightService;
-
 import javax.validation.Valid;
 import java.util.List;
 

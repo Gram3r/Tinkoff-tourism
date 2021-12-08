@@ -1,9 +1,7 @@
 package tinkoff.tourism.dao;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.data.repository.NoRepositoryBean;
 import tinkoff.tourism.model.Sight;
-
 import java.util.List;
 
 @NoRepositoryBean

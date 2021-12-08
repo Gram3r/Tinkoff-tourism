@@ -5,7 +5,7 @@
 
 <mapper namespace="tinkoff.tourism.dao.BarRepository">
 
-    <insert id="addBar" parameterType="tinkoff.tourism.model.Bar">
+    <insert id="addSight" parameterType="tinkoff.tourism.model.Bar">
         INSERT INTO bars (name, xCoordinate, yCoordinate, description, siteLink, openHours, price, forAdults)
         VALUES (#{name}, #{xCoordinate}, #{yCoordinate}, #{description}, #{siteLink}, #{openHours}, #{price}, #{forAdults})
     </insert>
@@ -21,7 +21,7 @@
         WHERE bars.id = #{id}
     </select>
 
-    <update id="updateBar" parameterType="tinkoff.tourism.model.Bar">
+    <update id="updateSight" parameterType="tinkoff.tourism.model.Bar">
         UPDATE bars
         SET NAME        = #{name},
             XCOORDINATE = #{xCoordinate},
