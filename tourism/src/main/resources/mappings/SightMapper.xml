@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tinkoff.tourism.dao.SightRepository">
+
+    <insert id="addSight" parameterType="tinkoff.tourism.model.Sight">
+        INSERT INTO sights (name, xCoordinate, yCoordinate, description, siteLink, openHours, price)
+        VALUES (#{name}, #{xCoordinate}, #{yCoordinate}, #{description}, #{siteLink}, #{openHours}, #{price})
+    </insert>
+
+    <select id="findAll" resultMap="SightMap">
+        SELECT *
+        FROM sights
+    </select>
+
+    <select id="findById" resultMap="SightMap">
+        SELECT *
+        FROM sights
+        WHERE sights.id = #{id}
+    </select>
+
+    <update id="updateSight" parameterType="tinkoff.tourism.model.Sight">
+        UPDATE sights
+        SET NAME        = #{name},
+            XCOORDINATE = #{xCoordinate},
+            YCOORDINATE = #{yCoordinate},
+            DESCRIPTION = #{description},
+            SITELINK = #{siteLink},
+            OPENHOURS = #{openHours},
+            PRICE = #{price}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE
+        FROM sights
+        WHERE ID = #{id}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE
+        FROM sights
+    </delete>
+
+    <resultMap id="SightMap" type="tinkoff.tourism.model.Sight">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="xCoordinate" column="xCoordinate"/>
+        <result property="yCoordinate" column="yCoordinate"/>
+        <result property="description" column="description"/>
+        <result property="siteLink" column="siteLink"/>
+        <result property="openHours" column="openHours"/>
+        <result property="price" column="price"/>
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tinkoff.tourism.dao.StreetRepository">
+
+    <insert id="addStreet" parameterType="tinkoff.tourism.model.Street">
+        INSERT INTO streets (name, xCoordinate, yCoordinate, description, siteLink, openHours, price, history)
+        VALUES (#{name}, #{xCoordinate}, #{yCoordinate}, #{description}, #{siteLink}, #{openHours}, #{price}, #{history})
+    </insert>
+
+    <select id="findAll" resultMap="StreetMap">
+        SELECT *
+        FROM streets
+    </select>
+
+    <select id="findById" resultMap="StreetMap">
+        SELECT *
+        FROM streets
+        WHERE streets.id = #{id}
+    </select>
+
+    <update id="updateStreet" parameterType="tinkoff.tourism.model.Street">
+        UPDATE streets
+        SET NAME        = #{name},
+            XCOORDINATE = #{xCoordinate},
+            YCOORDINATE = #{yCoordinate},
+            DESCRIPTION = #{description},
+            SITELINK = #{siteLink},
+            OPENHOURS = #{openHours},
+            PRICE = #{price},
+            HISTORY = #{history}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE
+        FROM streets
+        WHERE ID = #{id}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE
+        FROM streets
+    </delete>
+
+    <resultMap id="StreetMap" type="tinkoff.tourism.model.Street">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="xCoordinate" column="xCoordinate"/>
+        <result property="yCoordinate" column="yCoordinate"/>
+        <result property="description" column="description"/>
+        <result property="siteLink" column="siteLink"/>
+        <result property="openHours" column="openHours"/>
+        <result property="price" column="price"/>
+        <result property="history" column="history"/>
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tinkoff.tourism.dao.MuseumRepository">
+
+    <insert id="addMuseum" parameterType="tinkoff.tourism.model.Museum">
+        INSERT INTO museums (name, xCoordinate, yCoordinate, description, siteLink, openHours, price, discountForChildren)
+        VALUES (#{name}, #{xCoordinate}, #{yCoordinate}, #{description}, #{siteLink}, #{openHours}, #{price}, #{discountForChildren})
+    </insert>
+
+    <select id="findAll" resultMap="MuseumMap">
+        SELECT *
+        FROM museums
+    </select>
+
+    <select id="findById" resultMap="MuseumMap">
+        SELECT *
+        FROM museums
+        WHERE museums.id = #{id}
+    </select>
+
+    <update id="updateMuseum" parameterType="tinkoff.tourism.model.Museum">
+        UPDATE museums
+        SET NAME        = #{name},
+            XCOORDINATE = #{xCoordinate},
+            YCOORDINATE = #{yCoordinate},
+            DESCRIPTION = #{description},
+            SITELINK = #{siteLink},
+            OPENHOURS = #{openHours},
+            PRICE = #{price},
+            DISCOUNTFORCHILDREN = #{discountForChildren}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE
+        FROM museums
+        WHERE ID = #{id}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE
+        FROM museums
+    </delete>
+
+    <resultMap id="MuseumMap" type="tinkoff.tourism.model.Museum">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="xCoordinate" column="xCoordinate"/>
+        <result property="yCoordinate" column="yCoordinate"/>
+        <result property="description" column="description"/>
+        <result property="siteLink" column="siteLink"/>
+        <result property="openHours" column="openHours"/>
+        <result property="price" column="price"/>
+        <result property="discountForChildren" column="discountForChildren"/>
+    </resultMap>
+
+</mapper>

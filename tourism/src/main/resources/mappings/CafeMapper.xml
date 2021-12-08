@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tinkoff.tourism.dao.CafeRepository">
+
+    <insert id="addSight" parameterType="tinkoff.tourism.model.Cafe">
+        INSERT INTO cafes (name, xCoordinate, yCoordinate, description, siteLink, openHours, price, foodType)
+        VALUES (#{name}, #{xCoordinate}, #{yCoordinate}, #{description}, #{siteLink}, #{openHours}, #{price}, #{foodType})
+    </insert>
+
+    <select id="findAll" resultMap="CafeMap">
+        SELECT *
+        FROM cafes
+    </select>
+
+    <select id="findById" resultMap="CafeMap">
+        SELECT *
+        FROM cafes
+        WHERE cafes.id = #{id}
+    </select>
+
+    <update id="updateSight" parameterType="tinkoff.tourism.model.Cafe">
+        UPDATE cafes
+        SET NAME        = #{name},
+            XCOORDINATE = #{xCoordinate},
+            YCOORDINATE = #{yCoordinate},
+            DESCRIPTION = #{description},
+            SITELINK = #{siteLink},
+            OPENHOURS = #{openHours},
+            PRICE = #{price},
+            FOODTYPE = #{foodType}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE
+        FROM cafes
+        WHERE ID = #{id}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE
+        FROM cafes
+    </delete>
+
+    <resultMap id="CafeMap" type="tinkoff.tourism.model.Cafe">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="xCoordinate" column="xCoordinate"/>
+        <result property="yCoordinate" column="yCoordinate"/>
+        <result property="description" column="description"/>
+        <result property="siteLink" column="siteLink"/>
+        <result property="openHours" column="openHours"/>
+        <result property="price" column="price"/>
+        <result property="foodType" column="foodType"/>
+    </resultMap>
+
+</mapper>

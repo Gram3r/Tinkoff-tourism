@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tinkoff.tourism.dao.BarRepository">
+
+    <insert id="addBar" parameterType="tinkoff.tourism.model.Bar">
+        INSERT INTO bars (name, xCoordinate, yCoordinate, description, siteLink, openHours, price, forAdults)
+        VALUES (#{name}, #{xCoordinate}, #{yCoordinate}, #{description}, #{siteLink}, #{openHours}, #{price}, #{forAdults})
+    </insert>
+
+    <select id="findAll" resultMap="BarMap">
+        SELECT *
+        FROM bars
+    </select>
+
+    <select id="findById" resultMap="BarMap">
+        SELECT *
+        FROM bars
+        WHERE bars.id = #{id}
+    </select>
+
+    <update id="updateBar" parameterType="tinkoff.tourism.model.Bar">
+        UPDATE bars
+        SET NAME        = #{name},
+            XCOORDINATE = #{xCoordinate},
+            YCOORDINATE = #{yCoordinate},
+            DESCRIPTION = #{description},
+            SITELINK = #{siteLink},
+            OPENHOURS = #{openHours},
+            PRICE = #{price},
+            FORADULTS = #{forAdults}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE
+        FROM bars
+        WHERE ID = #{id}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE
+        FROM bars
+    </delete>
+
+    <resultMap id="BarMap" type="tinkoff.tourism.model.Bar">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="xCoordinate" column="xCoordinate"/>
+        <result property="yCoordinate" column="yCoordinate"/>
+        <result property="description" column="description"/>
+        <result property="siteLink" column="siteLink"/>
+        <result property="openHours" column="openHours"/>
+        <result property="price" column="price"/>
+        <result property="forAdults" column="forAdults"/>
+    </resultMap>
+
+</mapper>
