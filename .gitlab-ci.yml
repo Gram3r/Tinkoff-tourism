@@ -33,8 +33,9 @@ deploy-job:
     - docker:dind
   stage: deploy
   script:
-    - docker build -f Dockerfile --iidfile imageid.txt -t registry.heroku.com/tourism-task .
-    - docker login -u _ -p 8afb0fa9-72f4-411d-9398-dfa472a79ffb registry.heroku.com
+    - docker build -f Dockerfile --iidfile imageid.txt -t tourism-task .
+    - docker login --email=_ --username=_ --password=8afb0fa9-72f4-411d-9398-dfa472a79ffb registry.heroku.com
+    - docker tag tourism-task registry.heroku.com/tourism-task
     - docker push registry.heroku.com/tourism-task
     - apk add --no-cache curl
     - echo "Docker Image ID is $(cat imageid.txt)"
