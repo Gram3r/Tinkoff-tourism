@@ -1,0 +1,47 @@
+stages:
+  - test
+  - build
+  - deploy
+
+unit-test-job:
+  image: maven:3-openjdk-14
+  stage: test
+  script:
+    - pwd
+    - mvn test
+    - echo "Tests"
+
+
+build-job:
+  image: maven:3-openjdk-14
+  stage: build
+  script:
+    - mvn package -B -DskipTests
+    - echo "Compile complete."
+  artifacts:
+    paths:
+      - target/*.jar
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: always
+
+
+
+deploy-job:
+  image: docker:latest
+  services:
+    - docker:dind
+  stage: deploy
+  script:
+    - docker build -f Dockerfile --iidfile imageid.txt -t registry.heroku.com/tourism-task .
+    - docker login -u _ -p 38e507cf-159b-470f-b0e9-1ce79037190d registry.heroku.com
+    - docker push registry.heroku.com/tourism-task
+    - apk add --no-cache curl
+    - echo "Docker Image ID is $(cat imageid.txt)"
+    - |-
+      curl -X PATCH https://api.heroku.com/apps/tourism-task/formation --header "Content-Type: application/json" --header "Accept: application/vnd.heroku+json; version=3.docker-releases" --header "Authorization: Bearer 38e507cf-159b-470f-b0e9-1ce79037190d" --data '{ "updates": [ { "type": "web", "docker_image": "'$(cat imageid.txt)'" } ] }'
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: manual
+
+

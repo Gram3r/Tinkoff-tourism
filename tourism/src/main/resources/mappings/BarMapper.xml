@@ -3,11 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="tinkoff.tourism.dao.BarRepository">
+<mapper namespace="tinkoff.tourism.dao.sights.BarRepository">
 
-    <insert id="addSight" parameterType="tinkoff.tourism.model.Bar">
-        INSERT INTO bars (name, xCoordinate, yCoordinate, description, siteLink, openHours, price, forAdults)
-        VALUES (#{name}, #{xCoordinate}, #{yCoordinate}, #{description}, #{siteLink}, #{openHours}, #{price}, #{forAdults})
+    <insert id="addSight" parameterType="tinkoff.tourism.model.sights.Bar">
+        INSERT INTO bars (name, type, xCoordinate, yCoordinate, description, siteLink, openTime, closeTime, price, forAdults)
+        VALUES (#{name}, #{type}, #{xCoordinate}, #{yCoordinate}, #{description}, #{siteLink}, #{openTime}, #{closeTime}, #{price}, #{forAdults})
     </insert>
 
     <select id="findAll" resultMap="BarMap">
@@ -21,9 +21,10 @@
         WHERE bars.id = #{id}
     </select>
 
-    <update id="updateSight" parameterType="tinkoff.tourism.model.Bar">
+    <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Bar">
         UPDATE bars
         SET NAME        = #{name},
+            TYPE        = #{type},
             XCOORDINATE = #{xCoordinate},
             YCOORDINATE = #{yCoordinate},
             DESCRIPTION = #{description},
@@ -45,14 +46,16 @@
         FROM bars
     </delete>
 
-    <resultMap id="BarMap" type="tinkoff.tourism.model.Bar">
+    <resultMap id="BarMap" type="tinkoff.tourism.model.sights.Bar">
         <result property="id" column="id"/>
         <result property="name" column="name"/>
+        <result property="type" column="type"/>
         <result property="xCoordinate" column="xCoordinate"/>
         <result property="yCoordinate" column="yCoordinate"/>
         <result property="description" column="description"/>
         <result property="siteLink" column="siteLink"/>
-        <result property="openHours" column="openHours"/>
+        <result property="openTime" column="openTime"/>
+        <result property="closeTime" column="closeTime"/>
         <result property="price" column="price"/>
         <result property="forAdults" column="forAdults"/>
     </resultMap>

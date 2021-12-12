@@ -4,9 +4,10 @@ CREATE TABLE sights
     name        VARCHAR(64) NOT NULL,
     xCoordinate FLOAT NOT NULL,
     yCoordinate FLOAT NOT NULL,
-    description VARCHAR(64) NOT NULL,
+    description VARCHAR(256) NOT NULL,
     siteLink    VARCHAR(64),
-    openHours   VARCHAR(64),
+    openTime    VARCHAR(64),
+    closeTime   VARCHAR(64),
     price       INT
 );
 

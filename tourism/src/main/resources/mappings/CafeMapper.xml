@@ -3,11 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="tinkoff.tourism.dao.CafeRepository">
+<mapper namespace="tinkoff.tourism.dao.sights.CafeRepository">
 
-    <insert id="addSight" parameterType="tinkoff.tourism.model.Cafe">
-        INSERT INTO cafes (name, xCoordinate, yCoordinate, description, siteLink, openHours, price, foodType)
-        VALUES (#{name}, #{xCoordinate}, #{yCoordinate}, #{description}, #{siteLink}, #{openHours}, #{price}, #{foodType})
+    <insert id="addSight" parameterType="tinkoff.tourism.model.sights.Cafe">
+        INSERT INTO cafes (name, type, xCoordinate, yCoordinate, description, siteLink, openTime, closeTime, price, foodType)
+        VALUES (#{name}, #{type}, #{xCoordinate}, #{yCoordinate}, #{description}, #{siteLink}, #{openTime}, #{closeTime}, #{price}, #{foodType})
     </insert>
 
     <select id="findAll" resultMap="CafeMap">
@@ -21,9 +21,10 @@
         WHERE cafes.id = #{id}
     </select>
 
-    <update id="updateSight" parameterType="tinkoff.tourism.model.Cafe">
+    <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Cafe">
         UPDATE cafes
         SET NAME        = #{name},
+            TYPE        = #{type},
             XCOORDINATE = #{xCoordinate},
             YCOORDINATE = #{yCoordinate},
             DESCRIPTION = #{description},
@@ -45,14 +46,16 @@
         FROM cafes
     </delete>
 
-    <resultMap id="CafeMap" type="tinkoff.tourism.model.Cafe">
+    <resultMap id="CafeMap" type="tinkoff.tourism.model.sights.Cafe">
         <result property="id" column="id"/>
         <result property="name" column="name"/>
+        <result property="type" column="type"/>
         <result property="xCoordinate" column="xCoordinate"/>
         <result property="yCoordinate" column="yCoordinate"/>
         <result property="description" column="description"/>
         <result property="siteLink" column="siteLink"/>
-        <result property="openHours" column="openHours"/>
+        <result property="openTime" column="openTime"/>
+        <result property="closeTime" column="closeTime"/>
         <result property="price" column="price"/>
         <result property="foodType" column="foodType"/>
     </resultMap>

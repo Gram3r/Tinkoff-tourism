@@ -3,11 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="tinkoff.tourism.dao.StreetRepository">
+<mapper namespace="tinkoff.tourism.dao.sights.StreetRepository">
 
-    <insert id="addSight" parameterType="tinkoff.tourism.model.Street">
-        INSERT INTO streets (name, xCoordinate, yCoordinate, description, siteLink, openHours, price, history)
-        VALUES (#{name}, #{xCoordinate}, #{yCoordinate}, #{description}, #{siteLink}, #{openHours}, #{price}, #{history})
+    <insert id="addSight" parameterType="tinkoff.tourism.model.sights.Street">
+        INSERT INTO streets (name, type, xCoordinate, yCoordinate, description, siteLink, openTime, closeTime, price, history)
+        VALUES (#{name}, #{type}, #{xCoordinate}, #{yCoordinate}, #{description}, #{siteLink}, #{openTime}, #{closeTime}, #{price}, #{history})
     </insert>
 
     <select id="findAll" resultMap="StreetMap">
@@ -21,9 +21,10 @@
         WHERE streets.id = #{id}
     </select>
 
-    <update id="updateSight" parameterType="tinkoff.tourism.model.Street">
+    <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Street">
         UPDATE streets
         SET NAME        = #{name},
+            TYPE        = #{type},
             XCOORDINATE = #{xCoordinate},
             YCOORDINATE = #{yCoordinate},
             DESCRIPTION = #{description},
@@ -45,14 +46,16 @@
         FROM streets
     </delete>
 
-    <resultMap id="StreetMap" type="tinkoff.tourism.model.Street">
+    <resultMap id="StreetMap" type="tinkoff.tourism.model.sights.Street">
         <result property="id" column="id"/>
         <result property="name" column="name"/>
+        <result property="type" column="type"/>
         <result property="xCoordinate" column="xCoordinate"/>
         <result property="yCoordinate" column="yCoordinate"/>
         <result property="description" column="description"/>
         <result property="siteLink" column="siteLink"/>
-        <result property="openHours" column="openHours"/>
+        <result property="openTime" column="openTime"/>
+        <result property="closeTime" column="closeTime"/>
         <result property="price" column="price"/>
         <result property="history" column="history"/>
     </resultMap>

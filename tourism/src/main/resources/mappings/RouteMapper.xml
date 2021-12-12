@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tinkoff.tourism.dao.RouteRepository">
+
+    <select id="getRouteByBudget" parameterType="tinkoff.tourism.controller.dto.RouteRequest" resultMap="SightMap">
+        <![CDATA[
+        SELECT *
+        FROM sights
+        WHERE sights.price <= #{budget}
+        ]]>
+    </select>
+
+    <select id="getRouteByCategories" parameterType="tinkoff.tourism.controller.dto.RouteRequest" resultMap="SightMap">
+        SELECT *
+        FROM sights
+        WHERE sights.type IN
+        <foreach item="item" index="index" collection="categories" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="getRouteByTime" parameterType="tinkoff.tourism.controller.dto.RouteRequest" resultMap="SightMap">
+        <![CDATA[
+        SELECT *
+        FROM sights
+        WHERE sights.openTime <= #{endTime} AND sights.closeTime >= #{startTime}
+        ]]>
+    </select>
+
+    <select id="getRoute" parameterType="tinkoff.tourism.controller.dto.RouteRequest" resultMap="SightMap">
+        SELECT *
+        FROM sights
+        <![CDATA[
+        WHERE sights.price <= #{budget} AND
+              sights.openTime <= #{endTime} AND sights.closeTime >= #{startTime} AND
+            sights.type IN
+        ]]>
+            <foreach item="item" index="index" collection="categories" open="(" separator="," close=")">
+            #{item}
+            </foreach>
+        ORDER BY sights.openTime, sights.closeTime
+    </select>
+
+    <resultMap id="SightMap" type="tinkoff.tourism.model.sights.Sight">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="xCoordinate" column="xCoordinate"/>
+        <result property="yCoordinate" column="yCoordinate"/>
+        <result property="description" column="description"/>
+        <result property="siteLink" column="siteLink"/>
+        <result property="openTime" column="openTime"/>
+        <result property="closeTime" column="closeTime"/>
+        <result property="price" column="price"/>
+    </resultMap>
+
+</mapper>
