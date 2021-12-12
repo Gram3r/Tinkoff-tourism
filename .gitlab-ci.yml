@@ -42,6 +42,6 @@ deploy-job:
       curl -X PATCH https://api.heroku.com/apps/tourism-task/formation --header "Content-Type: application/json" --header "Accept: application/vnd.heroku+json; version=3.docker-releases" --header "Authorization: Bearer 38e507cf-159b-470f-b0e9-1ce79037190d" --data '{ "updates": [ { "type": "web", "docker_image": "'$(cat imageid.txt)'" } ] }'
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
-      when: manual
+      when: manual 
 
 
