@@ -6,25 +6,25 @@ stages:
 variables:
   DOCKER_DRIVER: overlay
 
-unit-test-job:
-  image: maven:3-openjdk-14
-  stage: test
-  script:
-    - pwd
-    - mvn test
-    - echo "Tests"
-
-
-build-job:
-  image: maven:3-openjdk-14
-  stage: build
-  script:
-    - mvn package -B -DskipTests
-    - echo "Compile complete."
-  artifacts:
-    paths:
-      - target/*.jar
-
+#unit-test-job:
+#  image: maven:3-openjdk-14
+#  stage: test
+#  script:
+#    - pwd
+#    - mvn test
+#    - echo "Tests"
+#
+#
+#build-job:
+#  image: maven:3-openjdk-14
+#  stage: build
+#  script:
+#    - mvn package -B -DskipTests
+#    - echo "Compile complete."
+#  artifacts:
+#    paths:
+#      - target/*.jar
+#
 
 
 deploy-job:
