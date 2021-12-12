@@ -1,16 +1,13 @@
 package tinkoff.tourism.model.sights;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import tinkoff.tourism.validation.sights.BarConstraint;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @BarConstraint
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Bar extends Sight {
     private Boolean forAdults;
 }

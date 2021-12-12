@@ -8,8 +8,6 @@ import lombok.experimental.FieldDefaults;
 import tinkoff.tourism.validation.sights.SightConstraint;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @SightConstraint
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Sight {
