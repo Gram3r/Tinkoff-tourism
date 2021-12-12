@@ -33,12 +33,12 @@ deploy-job:
     - docker:dind
   stage: deploy
   script:
-    - docker build -f Dockerfile --iidfile imageid.txt -t tourism-task .
+    - docker build -f Dockerfile --iidfile imageid.txt -t tourism-tinkoff .
     - docker login --username=_ --password=8afb0fa9-72f4-411d-9398-dfa472a79ffb registry.heroku.com
-    - docker tag tourism-task registry.heroku.com/tourism-task
-    - docker push registry.heroku.com/tourism-task
+    - docker tag tourism-tinkoff registry.heroku.com/tourism-tinkoff
+    - docker push registry.heroku.com/tourism-tinkoff
     - apk add --no-cache curl
     - echo "Docker Image ID is $(cat imageid.txt)"
     - |-
-      curl -X PATCH https://api.heroku.com/apps/tourism-task/formation --header "Content-Type: application/json" --header "Accept: application/vnd.heroku+json; version=3.docker-releases" --header "Authorization: Bearer 8afb0fa9-72f4-411d-9398-dfa472a79ffb" --data '{ "updates": [ { "type": "web", "docker_image": "'$(cat imageid.txt)'" } ] }'
+      curl -X PATCH https://api.heroku.com/apps/tourism-tinkoff/formation --header "Content-Type: application/json" --header "Accept: application/vnd.heroku+json; version=3.docker-releases" --header "Authorization: Bearer 8afb0fa9-72f4-411d-9398-dfa472a79ffb" --data '{ "updates": [ { "type": "web", "docker_image": "'$(cat imageid.txt)'" } ] }'
 
