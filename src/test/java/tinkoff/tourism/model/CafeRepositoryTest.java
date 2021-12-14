@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class CafeRepositoryTest {
+public class CafeRepositoryTest extends AbstractTest {
 
     @Autowired
     private SightRepository sightRepository;

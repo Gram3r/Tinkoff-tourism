@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import tinkoff.tourism.AbstractTest;
 import tinkoff.tourism.dao.sights.CafeRepository;
 import tinkoff.tourism.dao.sights.SightRepository;
 import tinkoff.tourism.model.sights.Cafe;
@@ -19,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @WithMockUser(roles = "ADMIN")
-public class CafeValidationTest {
+public class CafeValidationTest extends AbstractTest {
 
     @Autowired
     private ObjectMapper objectMapper;

@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @WithMockUser(roles = "ADMIN")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class RouteTest {
+public class RouteTest extends AbstractTest {
 
     @Autowired
     private ObjectMapper objectMapper;

@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class AuthorizationTest {
+public class AuthorizationTest extends AbstractTest {
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
