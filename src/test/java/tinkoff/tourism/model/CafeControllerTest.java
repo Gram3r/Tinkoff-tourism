@@ -5,7 +5,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest
 @AutoConfigureMockMvc
 @WithMockUser(roles = "ADMIN")
 public class CafeControllerTest extends AbstractTest {
@@ -40,6 +38,20 @@ public class CafeControllerTest extends AbstractTest {
 
     @Test
     public void addCafeSuccess() throws Exception {
+        Cafe cafe = createCafe("Stolovaya 1");
+        mockMvc.perform(
+                        post("/cafe")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(cafe))
+                )
+                .andExpect(status().is2xxSuccessful());
+
+        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        assertEquals(cafe, cafeRepository.findById(cafe.getId()));
+    }
+
+    @Test
+    public void addCafeNoSiteLinkSuccess() throws Exception {
         Cafe cafe = createCafe("Stolovaya 1");
         mockMvc.perform(
                         post("/cafe")

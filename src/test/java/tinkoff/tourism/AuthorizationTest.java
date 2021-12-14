@@ -5,13 +5,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import tinkoff.tourism.dao.sights.CafeRepository;
 import tinkoff.tourism.dao.sights.SightRepository;
 import tinkoff.tourism.model.sights.Cafe;
-
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -20,7 +18,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
 @AutoConfigureMockMvc
 public class AuthorizationTest extends AbstractTest {
     @Autowired
@@ -121,7 +118,7 @@ public class AuthorizationTest extends AbstractTest {
                 .andExpect(content().string(objectMapper.writeValueAsString(cafe)));
     }
 
-    
+
     private Cafe createCafe(String name) {
         return Cafe.builder()
                 .id(1L)

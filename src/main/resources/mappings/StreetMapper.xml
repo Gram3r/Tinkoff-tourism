@@ -6,7 +6,7 @@
 <mapper namespace="tinkoff.tourism.dao.sights.StreetRepository">
 
     <insert id="addSight" parameterType="tinkoff.tourism.model.sights.Street">
-        INSERT INTO streets (name, type, xCoordinate, yCoordinate, description, siteLink, openTime, closeTime, price, history)
+        INSERT INTO streets (name, type, x_coordinate, y_coordinate, description, site_link, open_time, close_time, price, history)
         VALUES (#{name}, #{type}, #{xCoordinate}, #{yCoordinate}, #{description}, #{siteLink}, #{openTime}, #{closeTime}, #{price}, #{history})
     </insert>
 
@@ -31,12 +31,12 @@
         UPDATE streets
         SET NAME        = #{name},
             TYPE        = #{type},
-            XCOORDINATE = #{xCoordinate},
-            YCOORDINATE = #{yCoordinate},
+            X_COORDINATE = #{xCoordinate},
+            Y_COORDINATE = #{yCoordinate},
             DESCRIPTION = #{description},
-            SITELINK = #{siteLink},
-            OPENTIME = #{openTime},
-            CLOSETIME = #{closeTime},
+            SITE_LINK = #{siteLink},
+            OPEN_TIME = #{openTime},
+            CLOSE_TIME = #{closeTime},
             PRICE = #{price},
             HISTORY = #{history}
         WHERE ID = #{id}
@@ -57,12 +57,12 @@
         <result property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="type" column="type"/>
-        <result property="xCoordinate" column="xCoordinate"/>
-        <result property="yCoordinate" column="yCoordinate"/>
+        <result property="xCoordinate" column="x_coordinate"/>
+        <result property="yCoordinate" column="y_coordinate"/>
         <result property="description" column="description"/>
-        <result property="siteLink" column="siteLink"/>
-        <result property="openTime" column="openTime"/>
-        <result property="closeTime" column="closeTime"/>
+        <result property="siteLink" column="site_link"/>
+        <result property="openTime" column="open_time"/>
+        <result property="closeTime" column="close_time"/>
         <result property="price" column="price"/>
         <result property="history" column="history"/>
     </resultMap>
