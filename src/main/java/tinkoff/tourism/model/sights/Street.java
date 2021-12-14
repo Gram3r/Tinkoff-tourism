@@ -2,12 +2,17 @@ package tinkoff.tourism.model.sights;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
 import tinkoff.tourism.validation.sights.StreetConstraint;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
 @StreetConstraint
+
+@Data
+@SuperBuilder
+@RequiredArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
+
 public class Street extends Sight {
-    private String history;
+    String history;
 }

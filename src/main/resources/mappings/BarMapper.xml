@@ -21,6 +21,12 @@
         WHERE bars.id = #{id}
     </select>
 
+    <select id="findByName" resultMap="BarMap">
+        SELECT *
+        FROM bars
+        WHERE bars.name = #{name}
+    </select>
+
     <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Bar">
         UPDATE bars
         SET NAME        = #{name},
@@ -29,7 +35,8 @@
             YCOORDINATE = #{yCoordinate},
             DESCRIPTION = #{description},
             SITELINK = #{siteLink},
-            OPENHOURS = #{openHours},
+            OPENTIME = #{openTime},
+            CLOSETIME = #{closeTime},
             PRICE = #{price},
             FORADULTS = #{forAdults}
         WHERE ID = #{id}

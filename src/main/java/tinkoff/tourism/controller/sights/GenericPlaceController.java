@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-public interface GenericSightController<T extends Sight> {
+public interface GenericPlaceController<T extends Sight> {
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     void addSight(@RequestBody @Valid T sight);

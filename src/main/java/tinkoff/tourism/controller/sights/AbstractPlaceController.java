@@ -8,10 +8,10 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-public abstract class AbstractSightController<T extends Sight, S extends GenericSightService<T>> implements GenericSightController<T> {
+public abstract class AbstractPlaceController<T extends Sight, S extends GenericSightService<T>> implements GenericPlaceController<T> {
     protected final S service;
 
-    public AbstractSightController(S service) {
+    public AbstractPlaceController(S service) {
         this.service = service;
     }
 

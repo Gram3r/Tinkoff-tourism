@@ -3,8 +3,6 @@ package tinkoff.tourism.dao;
 import org.apache.ibatis.annotations.Mapper;
 import tinkoff.tourism.controller.dto.RouteRequest;
 import tinkoff.tourism.model.sights.Sight;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Mapper

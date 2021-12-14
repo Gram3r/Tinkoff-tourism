@@ -21,6 +21,12 @@
         WHERE museums.id = #{id}
     </select>
 
+    <select id="findByName" resultMap="MuseumMap">
+        SELECT *
+        FROM museums
+        WHERE museums.name = #{name}
+    </select>
+
     <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Museum">
         UPDATE museums
         SET NAME        = #{name},
@@ -29,7 +35,8 @@
             YCOORDINATE = #{yCoordinate},
             DESCRIPTION = #{description},
             SITELINK = #{siteLink},
-            OPENHOURS = #{openHours},
+            OPENTIME = #{openTime},
+            CLOSETIME = #{closeTime},
             PRICE = #{price},
             DISCOUNTFORCHILDREN = #{discountForChildren}
         WHERE ID = #{id}

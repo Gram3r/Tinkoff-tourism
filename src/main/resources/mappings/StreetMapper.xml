@@ -21,6 +21,12 @@
         WHERE streets.id = #{id}
     </select>
 
+    <select id="findByName" resultMap="StreetMap">
+        SELECT *
+        FROM streets
+        WHERE streets.name = #{name}
+    </select>
+
     <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Street">
         UPDATE streets
         SET NAME        = #{name},
@@ -29,7 +35,8 @@
             YCOORDINATE = #{yCoordinate},
             DESCRIPTION = #{description},
             SITELINK = #{siteLink},
-            OPENHOURS = #{openHours},
+            OPENTIME = #{openTime},
+            CLOSETIME = #{closeTime},
             PRICE = #{price},
             HISTORY = #{history}
         WHERE ID = #{id}

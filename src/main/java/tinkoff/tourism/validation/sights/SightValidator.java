@@ -1,9 +1,13 @@
 package tinkoff.tourism.validation.sights;
 
+import tinkoff.tourism.model.enums.TypeEnum;
 import tinkoff.tourism.model.sights.Sight;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.net.Proxy;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 
@@ -14,16 +18,21 @@ public class SightValidator implements ConstraintValidator<SightConstraint, Sigh
 
     @Override
     public boolean isValid(Sight sight, ConstraintValidatorContext constraintValidatorContext) {
+
+        Set<String> enumTypes = new HashSet<>();
+        for (TypeEnum typeValue : TypeEnum.values()){
+            enumTypes.add(typeValue.name());
+        }
+
         return sight != null &&
-                sight.getName() != null && !sight.getName().isBlank() &&
-                sight.getType() != null && !sight.getType().isBlank() &&
-                sight.getXCoordinate() != null && !sight.getXCoordinate().isInfinite() && !sight.getXCoordinate().isNaN() &&
-                sight.getYCoordinate() != null &&  !sight.getYCoordinate().isInfinite() && !sight.getYCoordinate().isNaN() &&
-                sight.getDescription() != null && !sight.getDescription().isBlank() &&
-                sight.getSiteLink() != null && validURL.matcher(sight.getSiteLink()).matches() &&
-                sight.getOpenTime() != null && validHours.matcher(sight.getOpenTime()).matches() &&
-                sight.getCloseTime() != null && validHours.matcher(sight.getCloseTime()).matches() &&
-                sight.getOpenTime().compareTo(sight.getCloseTime()) < 0 &&
-                sight.getPrice() >= 0;
+                !sight.getName().isBlank() &&
+                !sight.getType().isBlank() && enumTypes.contains(sight.getType().toUpperCase()) &&
+                !sight.getXCoordinate().isInfinite() && !sight.getXCoordinate().isNaN() &&
+                !sight.getYCoordinate().isInfinite() && !sight.getYCoordinate().isNaN() &&
+                !sight.getDescription().isBlank() &&
+                (sight.getSiteLink() == null || validURL.matcher(sight.getSiteLink()).matches()) &&
+                validHours.matcher(sight.getOpenTime()).matches() &&
+                validHours.matcher(sight.getCloseTime()).matches() &&
+                sight.getOpenTime().compareTo(sight.getCloseTime()) < 0;
     }
 }

@@ -13,6 +13,8 @@ public interface GenericRepository<T extends Sight> {
 
     T findById(Long id);
 
+    T findByName(String name);
+
     void updateSight(T sight);
 
     void delete(Long id);
