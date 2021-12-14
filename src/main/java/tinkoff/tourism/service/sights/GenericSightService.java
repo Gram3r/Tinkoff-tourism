@@ -15,5 +15,7 @@ public interface GenericSightService<T extends Sight>{
 
     T findById(Long id);
 
+    T findByName(String name);
+
     List<T> findAll();
 }

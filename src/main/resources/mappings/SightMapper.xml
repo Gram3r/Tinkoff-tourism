@@ -5,11 +5,6 @@
 
 <mapper namespace="tinkoff.tourism.dao.sights.SightRepository">
 
-    <insert id="addSight" parameterType="tinkoff.tourism.model.sights.Sight">
-        INSERT INTO sights (name, type, xCoordinate, yCoordinate, description, siteLink, openTime, closeTime, price)
-        VALUES (#{name}, #{type}, #{xCoordinate}, #{yCoordinate}, #{description}, #{siteLink}, #{openTime}, #{closeTime}, #{price})
-    </insert>
-
     <select id="findAll" resultMap="SightMap">
         SELECT *
         FROM sights
@@ -21,6 +16,12 @@
         WHERE sights.id = #{id}
     </select>
 
+    <select id="findByName" resultMap="SightMap">
+        SELECT *
+        FROM sights
+        WHERE sights.name = #{name}
+    </select>
+
     <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Sight">
         UPDATE sights
         SET NAME        = #{name},
@@ -29,7 +30,8 @@
             YCOORDINATE = #{yCoordinate},
             DESCRIPTION = #{description},
             SITELINK = #{siteLink},
-            OPENHOURS = #{openHours},
+            OPENTIME = #{openTime},
+            CLOSETIME = #{closeTime},
             PRICE = #{price}
         WHERE ID = #{id}
     </update>

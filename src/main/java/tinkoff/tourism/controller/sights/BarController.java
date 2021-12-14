@@ -6,7 +6,7 @@ import tinkoff.tourism.service.sights.BarService;
 
 @RestController
 @RequestMapping("/bar")
-public class BarController extends AbstractSightController<Bar, BarService> {
+public class BarController extends AbstractPlaceController<Bar, BarService> {
     public BarController(BarService service) {
         super(service);
     }
