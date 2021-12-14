@@ -5,11 +5,11 @@ stages:
 
 variables:
   DOCKER_DRIVER: overlay
+  DOCKER_HOST: "tcp://docker:2375"
+  DOCKER_TLS_CERTDIR: ""
 
 unit-test-job:
-  image:
-    - maven:3-openjdk-14
-    - postgres:13
+  image: maven:3-openjdk-14
   stage: test
   script:
     - pwd
