@@ -21,6 +21,12 @@
         WHERE cafes.id = #{id}
     </select>
 
+    <select id="findByName" resultMap="CafeMap">
+        SELECT *
+        FROM cafes
+        WHERE cafes.name = #{name}
+    </select>
+
     <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Cafe">
         UPDATE cafes
         SET NAME        = #{name},
@@ -29,7 +35,8 @@
             YCOORDINATE = #{yCoordinate},
             DESCRIPTION = #{description},
             SITELINK = #{siteLink},
-            OPENHOURS = #{openHours},
+            OPENTIME = #{openTime},
+            CLOSETIME = #{closeTime},
             PRICE = #{price},
             FOODTYPE = #{foodType}
         WHERE ID = #{id}

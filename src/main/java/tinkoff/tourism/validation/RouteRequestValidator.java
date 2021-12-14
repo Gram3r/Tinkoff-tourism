@@ -1,8 +1,12 @@
 package tinkoff.tourism.validation;
 
 import tinkoff.tourism.controller.dto.RouteRequest;
+import tinkoff.tourism.model.enums.TypeEnum;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 
@@ -12,10 +16,9 @@ public class RouteRequestValidator implements ConstraintValidator<RouteRequestCo
 
     @Override
     public boolean isValid(RouteRequest route, ConstraintValidatorContext constraintValidatorContext) {
-        //:TODO allMatch normal matcher
-        return route.getCategories() != null || route.getCategories().stream().allMatch(i -> i != null && !i.isBlank()) &&
-                route.getBudget() != null || route.getBudget() >= 0 &&
-                route.getStartTime() != null || validHours.matcher(route.getStartTime()).matches() &&
-                route.getEndTime() != null || validHours.matcher(route.getEndTime()).matches();
+
+        return route.getCategories().stream().allMatch(Objects::nonNull) &&
+                validHours.matcher(route.getStartTime()).matches() &&
+                validHours.matcher(route.getEndTime()).matches();
     }
 }

@@ -6,7 +6,7 @@ import tinkoff.tourism.service.sights.CafeService;
 
 @RestController
 @RequestMapping("/cafe")
-public class CafeController extends AbstractSightController<Cafe, CafeService> {
+public class CafeController extends AbstractPlaceController<Cafe, CafeService> {
     public CafeController(CafeService service) {
         super(service);
     }
