@@ -3,12 +3,14 @@ stages:
   - build
   - deploy
 
+services:
+  - docker:dind
+
 variables:
   DOCKER_DRIVER: overlay
   DOCKER_HOST: "tcp://docker:2375"
-  DOCKER_TLS_CERTDIR: ""
 
-unit-test-job:
+test-job:
   image: maven:3-openjdk-14
   stage: test
   script:
@@ -26,8 +28,6 @@ build-job:
 
 deploy-job:
   image: docker:latest
-  services:
-    - docker:dind
   stage: deploy
   script:
     - docker build -f Dockerfile --iidfile imageid.txt -t tourism-tinkoff .
