@@ -7,7 +7,9 @@ variables:
   DOCKER_DRIVER: overlay
 
 unit-test-job:
-  image: maven:3-openjdk-14
+  image:
+    - maven:3-openjdk-14
+    - postgres:13
   stage: test
   script:
     - pwd
