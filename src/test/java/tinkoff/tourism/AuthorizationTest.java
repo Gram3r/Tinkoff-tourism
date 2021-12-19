@@ -5,13 +5,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import tinkoff.tourism.dao.sights.CafeRepository;
 import tinkoff.tourism.dao.sights.SightRepository;
 import tinkoff.tourism.model.sights.Cafe;
-
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -20,9 +18,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
 @AutoConfigureMockMvc
-public class AuthorizationTest {
+public class AuthorizationTest extends AbstractTest {
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
@@ -79,7 +76,7 @@ public class AuthorizationTest {
     public void getCafeUserSuccess() throws Exception {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         mockMvc.perform(
                         get("/cafe")
@@ -102,7 +99,7 @@ public class AuthorizationTest {
                 )
                 .andExpect(status().is2xxSuccessful());
 
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
         assertEquals(cafe, cafeRepository.findById(cafe.getId()));
     }
 
@@ -110,7 +107,7 @@ public class AuthorizationTest {
     public void getCafeAdminSuccess() throws Exception {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         mockMvc.perform(
                         get("/cafe")
@@ -121,7 +118,7 @@ public class AuthorizationTest {
                 .andExpect(content().string(objectMapper.writeValueAsString(cafe)));
     }
 
-    
+
     private Cafe createCafe(String name) {
         return Cafe.builder()
                 .id(1L)

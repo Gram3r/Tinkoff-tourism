@@ -1,24 +1,20 @@
 package tinkoff.tourism.model;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
-import tinkoff.tourism.dao.sights.CafeRepository;
-import tinkoff.tourism.dao.sights.SightRepository;
+import tinkoff.tourism.AbstractTest;
 import tinkoff.tourism.model.sights.Cafe;
 import tinkoff.tourism.service.sights.CafeService;
 import tinkoff.tourism.service.sights.SightService;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
 @AutoConfigureMockMvc
-public class CafeServiceTest {
+public class CafeServiceTest extends AbstractTest {
 
     @Autowired
     private SightService sightService;
@@ -34,19 +30,19 @@ public class CafeServiceTest {
     public void addCafeSuccess() {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeService.addSight(cafe);
-        cafe.setId(cafeService.findByName(cafe.getName()).getId());
+        cafe.setId(cafeService.findByName(cafe.getName()).get(0).getId());
 
-        assertEquals(cafe, cafeService.findByName(cafe.getName()));
+        assertEquals(cafe, cafeService.findByName(cafe.getName()).get(0));
     }
 
     @Test
     public void getCafeSuccess() {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeService.addSight(cafe);
-        cafe.setId(cafeService.findByName(cafe.getName()).getId());
+        cafe.setId(cafeService.findByName(cafe.getName()).get(0).getId());
 
         assertEquals(cafe, cafeService.findById(cafe.getId()));
-        assertEquals(cafe, cafeService.findByName(cafe.getName()));
+        assertEquals(cafe, cafeService.findByName(cafe.getName()).get(0));
     }
 
     @Test
@@ -54,14 +50,14 @@ public class CafeServiceTest {
         Cafe cafe = createCafe("Stolovaya 1");
 
         assertNull(cafeService.findById(cafe.getId()));
-        assertNull(cafeService.findByName(cafe.getName()));
+        assertEquals(List.of(), cafeService.findByName(cafe.getName()));
     }
 
     @Test
     public void updateCafeSuccess() {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeService.addSight(cafe);
-        cafe.setId(cafeService.findByName(cafe.getName()).getId());
+        cafe.setId(cafeService.findByName(cafe.getName()).get(0).getId());
         Cafe cafe2 = createCafe("Stolovaya 1");
         cafe2.setId(cafe.getId());
 
@@ -77,7 +73,7 @@ public class CafeServiceTest {
     public void DeleteCafeSuccess() {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeService.addSight(cafe);
-        cafe.setId(cafeService.findByName(cafe.getName()).getId());
+        cafe.setId(cafeService.findByName(cafe.getName()).get(0).getId());
 
         assertEquals(cafe, cafeService.findById(cafe.getId()));
 

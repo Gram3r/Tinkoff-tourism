@@ -5,55 +5,30 @@
 
 <mapper namespace="tinkoff.tourism.dao.RouteRepository">
 
-    <select id="getRouteByBudget" parameterType="tinkoff.tourism.controller.dto.RouteRequest" resultMap="SightMap">
-        <![CDATA[
-        SELECT *
-        FROM sights
-        WHERE sights.price <= #{budget}
-        ]]>
-    </select>
-
-    <select id="getRouteByCategories" parameterType="tinkoff.tourism.controller.dto.RouteRequest" resultMap="SightMap">
-        SELECT *
-        FROM sights
-        WHERE sights.type IN
-        <foreach item="item" index="index" collection="categories" open="(" separator="," close=")">
-            #{item}
-        </foreach>
-    </select>
-
-    <select id="getRouteByTime" parameterType="tinkoff.tourism.controller.dto.RouteRequest" resultMap="SightMap">
-        <![CDATA[
-        SELECT *
-        FROM sights
-        WHERE sights.openTime <= #{endTime} AND sights.closeTime >= #{startTime}
-        ]]>
-    </select>
-
     <select id="getRoute" parameterType="tinkoff.tourism.controller.dto.RouteRequest" resultMap="SightMap">
         SELECT *
         FROM sights
         <![CDATA[
         WHERE sights.price <= #{budget} AND
-              sights.openTime <= #{endTime} AND sights.closeTime >= #{startTime} AND
+              sights.open_time <= #{endTime} AND sights.close_time >= #{startTime} AND
             sights.type IN
         ]]>
             <foreach item="item" index="index" collection="categories" open="(" separator="," close=")">
             #{item}
             </foreach>
-        ORDER BY sights.openTime, sights.closeTime
+        ORDER BY sights.open_time, sights.close_time
     </select>
 
     <resultMap id="SightMap" type="tinkoff.tourism.model.sights.Sight">
         <result property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="type" column="type"/>
-        <result property="xCoordinate" column="xCoordinate"/>
-        <result property="yCoordinate" column="yCoordinate"/>
+        <result property="xCoordinate" column="x_coordinate"/>
+        <result property="yCoordinate" column="y_coordinate"/>
         <result property="description" column="description"/>
-        <result property="siteLink" column="siteLink"/>
-        <result property="openTime" column="openTime"/>
-        <result property="closeTime" column="closeTime"/>
+        <result property="siteLink" column="site_link"/>
+        <result property="openTime" column="open_time"/>
+        <result property="closeTime" column="close_time"/>
         <result property="price" column="price"/>
     </resultMap>
 

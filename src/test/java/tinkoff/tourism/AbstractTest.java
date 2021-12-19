@@ -1,6 +1,5 @@
 package tinkoff.tourism;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContextInitializer;
@@ -17,14 +16,14 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 public class AbstractTest implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
-    private static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:13");
+    private static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:latest");
 
     static {
         postgres.start();
     }
 
     @Override
-    public void initialize(@NotNull ConfigurableApplicationContext applicationContext) {
+    public void initialize(ConfigurableApplicationContext applicationContext) {
         TestPropertySourceUtils.addInlinedPropertiesToEnvironment(
                 applicationContext,
                 "spring.datasource.url=" + postgres.getJdbcUrl(),

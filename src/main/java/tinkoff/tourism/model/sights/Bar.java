@@ -9,7 +9,8 @@ import tinkoff.tourism.validation.sights.BarConstraint;
 
 @Data
 @SuperBuilder
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 

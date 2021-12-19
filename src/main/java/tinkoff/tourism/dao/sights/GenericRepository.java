@@ -13,7 +13,9 @@ public interface GenericRepository<T extends Sight> {
 
     T findById(Long id);
 
-    T findByName(String name);
+    List<T> findByName(String name);
+
+    List<T> findByDistance(Double x, Double y, Double distance);
 
     void updateSight(T sight);
 

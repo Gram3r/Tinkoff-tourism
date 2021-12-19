@@ -20,23 +20,11 @@ public class RouteController {
         this.service = service;
     }
 
-    @GetMapping(value = "/budget", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public List<Sight> getRouteByBudget(@RequestBody @Valid RouteRequest request) {
-        return service.getRouteByBudget(request);
-    }
-
-    @GetMapping(value = "/categories", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public List<Sight> getRouteByCategories(@RequestBody @Valid RouteRequest request) {
-        return service.getRouteByCategories(request);
-    }
-
-    @GetMapping(value = "/time", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    public List<Sight> getRouteByTime(@RequestBody @Valid RouteRequest request) {
-        return service.getRouteByTime(request);
-    }
-
     @GetMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public List<Sight> getRoute(@RequestBody @Valid RouteRequest request) {
+        if (request.getBudget() == null) request.setBudget(Integer.MAX_VALUE);
+        if (request.getStartTime() == null) request.setStartTime("00:00");
+        if (request.getEndTime() == null) request.setEndTime("23:59");
         return service.getRoute(request);
     }
 }

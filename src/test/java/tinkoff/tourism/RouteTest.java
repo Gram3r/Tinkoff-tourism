@@ -1,12 +1,9 @@
 package tinkoff.tourism;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -20,15 +17,13 @@ import tinkoff.tourism.model.sights.Sight;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest
 @AutoConfigureMockMvc
 @WithMockUser(roles = "ADMIN")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class RouteTest {
+public class RouteTest extends AbstractTest {
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -49,11 +44,11 @@ public class RouteTest {
     public void startDb() {
         cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         museum = createMuseum("Hermitage");
         museumRepository.addSight(museum);
-        museum.setId(museumRepository.findByName(museum.getName()).getId());
+        museum.setId(museumRepository.findByName(museum.getName()).get(0).getId());
     }
 
     @AfterAll
