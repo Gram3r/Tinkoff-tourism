@@ -15,18 +15,6 @@ public class RouteService {
         this.repository = repository;
     }
 
-    public List<Sight> getRouteByCategories(RouteRequest request) {
-        return repository.getRouteByCategories(request);
-    }
-
-    public List<Sight> getRouteByBudget(RouteRequest request) {
-        return repository.getRouteByBudget(request);
-    }
-
-    public List<Sight> getRouteByTime(RouteRequest request) {
-        return repository.getRouteByTime(request);
-    }
-
     public List<Sight> getRoute(RouteRequest request) {
         return repository.getRoute(request);
     }

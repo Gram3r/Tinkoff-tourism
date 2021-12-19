@@ -8,11 +8,5 @@ import java.util.List;
 @Mapper
 public interface RouteRepository {
 
-    List<Sight> getRouteByCategories(RouteRequest categories);
-
-    List<Sight> getRouteByBudget(RouteRequest budget);
-
-    List<Sight> getRouteByTime(RouteRequest time);
-
     List<Sight> getRoute(RouteRequest request);
 }

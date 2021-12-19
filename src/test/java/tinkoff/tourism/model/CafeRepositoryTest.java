@@ -1,26 +1,20 @@
 package tinkoff.tourism.model;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
 import tinkoff.tourism.AbstractTest;
 import tinkoff.tourism.dao.sights.CafeRepository;
 import tinkoff.tourism.dao.sights.SightRepository;
 import tinkoff.tourism.model.sights.Cafe;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import java.util.List;
 
-@SpringBootTest
+import static org.junit.jupiter.api.Assertions.*;
+
 @AutoConfigureMockMvc
-public class CafeRepositoryTest {
+public class CafeRepositoryTest extends AbstractTest {
 
     @Autowired
     private SightRepository sightRepository;
@@ -36,7 +30,7 @@ public class CafeRepositoryTest {
     public void addCafeSuccess() {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         assertEquals(cafe, cafeRepository.findById(cafe.getId()));
     }
@@ -46,10 +40,10 @@ public class CafeRepositoryTest {
     public void getCafeSuccess() {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         assertEquals(cafe, cafeRepository.findById(cafe.getId()));
-        assertEquals(cafe, cafeRepository.findByName(cafe.getName()));
+        assertEquals(cafe, cafeRepository.findByName(cafe.getName()).get(0));
     }
 
     @Test
@@ -57,14 +51,14 @@ public class CafeRepositoryTest {
         Cafe cafe = createCafe("Stolovaya 1");
 
         assertNull(cafeRepository.findById(cafe.getId()));
-        assertNull(cafeRepository.findByName(cafe.getName()));
+        assertEquals(List.of(), cafeRepository.findByName(cafe.getName()));
     }
 
     @Test
     public void updateCafeSuccess() {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
         Cafe cafe2 = createCafe("Stolovaya 2");
         cafe2.setId(cafe.getId());
 
@@ -78,7 +72,7 @@ public class CafeRepositoryTest {
     public void DeleteCafeSuccess() {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         assertEquals(cafe, cafeRepository.findById(cafe.getId()));
 

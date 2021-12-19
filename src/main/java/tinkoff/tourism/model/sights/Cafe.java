@@ -9,7 +9,8 @@ import tinkoff.tourism.validation.sights.CafeConstraint;
 
 @Data
 @SuperBuilder
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 

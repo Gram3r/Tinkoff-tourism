@@ -19,32 +19,16 @@ import javax.validation.constraints.PositiveOrZero;
 
 public class Sight {
     Long id;
-
-    @NonNull
     @NotBlank
     String name;
-
-    @NonNull
     @NotBlank
     String type;
-
-    @NonNull
     Double xCoordinate;
-
-    @NonNull
     Double yCoordinate;
-
-    @NonNull
     String description;
-
     String siteLink;
-
-    @NonNull
     String openTime;
-
-    @NonNull
     String closeTime;
-
     @PositiveOrZero
     int price;
 }

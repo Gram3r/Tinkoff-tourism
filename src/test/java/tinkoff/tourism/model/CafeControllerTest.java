@@ -5,10 +5,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import tinkoff.tourism.AbstractTest;
 import tinkoff.tourism.dao.sights.CafeRepository;
 import tinkoff.tourism.dao.sights.SightRepository;
 import tinkoff.tourism.model.sights.Cafe;
@@ -17,10 +17,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest
 @AutoConfigureMockMvc
 @WithMockUser(roles = "ADMIN")
-public class CafeControllerTest {
+public class CafeControllerTest extends AbstractTest {
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -47,7 +46,21 @@ public class CafeControllerTest {
                 )
                 .andExpect(status().is2xxSuccessful());
 
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
+        assertEquals(cafe, cafeRepository.findById(cafe.getId()));
+    }
+
+    @Test
+    public void addCafeNoSiteLinkSuccess() throws Exception {
+        Cafe cafe = createCafe("Stolovaya 1");
+        mockMvc.perform(
+                        post("/cafe")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(cafe))
+                )
+                .andExpect(status().is2xxSuccessful());
+
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
         assertEquals(cafe, cafeRepository.findById(cafe.getId()));
     }
 
@@ -55,7 +68,7 @@ public class CafeControllerTest {
     public void getCafeSuccess() throws Exception {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         mockMvc.perform(
                         get("/cafe")
@@ -71,7 +84,7 @@ public class CafeControllerTest {
         Cafe cafe = createCafe("Stolovaya 1");
         mockMvc.perform(
                         get("/cafe")
-                                .param("id", cafe.getId().toString()))
+                                .param("id", "1"))
                 .andExpect(jsonPath("$").doesNotExist());
     }
 
@@ -79,7 +92,7 @@ public class CafeControllerTest {
     public void putCafeSuccess() throws Exception {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         Cafe cafe2 = createCafe("Stolovaya 2");
         cafe2.setId(cafe.getId());
@@ -100,7 +113,7 @@ public class CafeControllerTest {
     public void deleteCafeSuccess() throws Exception {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         mockMvc.perform(
                         delete("/cafe")
@@ -112,7 +125,6 @@ public class CafeControllerTest {
 
     private Cafe createCafe(String name) {
         return Cafe.builder()
-                .id(1L)
                 .name(name)
                 .type("cafe")
                 .xCoordinate(5.6)
