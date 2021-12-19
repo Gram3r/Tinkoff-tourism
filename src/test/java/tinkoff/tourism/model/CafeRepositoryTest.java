@@ -9,6 +9,8 @@ import tinkoff.tourism.dao.sights.CafeRepository;
 import tinkoff.tourism.dao.sights.SightRepository;
 import tinkoff.tourism.model.sights.Cafe;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @AutoConfigureMockMvc
@@ -28,7 +30,7 @@ public class CafeRepositoryTest extends AbstractTest {
     public void addCafeSuccess() {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         assertEquals(cafe, cafeRepository.findById(cafe.getId()));
     }
@@ -38,10 +40,10 @@ public class CafeRepositoryTest extends AbstractTest {
     public void getCafeSuccess() {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         assertEquals(cafe, cafeRepository.findById(cafe.getId()));
-        assertEquals(cafe, cafeRepository.findByName(cafe.getName()));
+        assertEquals(cafe, cafeRepository.findByName(cafe.getName()).get(0));
     }
 
     @Test
@@ -49,14 +51,14 @@ public class CafeRepositoryTest extends AbstractTest {
         Cafe cafe = createCafe("Stolovaya 1");
 
         assertNull(cafeRepository.findById(cafe.getId()));
-        assertNull(cafeRepository.findByName(cafe.getName()));
+        assertEquals(List.of(), cafeRepository.findByName(cafe.getName()));
     }
 
     @Test
     public void updateCafeSuccess() {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
         Cafe cafe2 = createCafe("Stolovaya 2");
         cafe2.setId(cafe.getId());
 
@@ -70,7 +72,7 @@ public class CafeRepositoryTest extends AbstractTest {
     public void DeleteCafeSuccess() {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         assertEquals(cafe, cafeRepository.findById(cafe.getId()));
 

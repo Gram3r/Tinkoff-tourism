@@ -27,6 +27,14 @@
         WHERE streets.name = #{name}
     </select>
 
+    <select id="findByDistance" resultMap="StreetMap">
+        SELECT *
+        FROM streets
+        <![CDATA[
+        WHERE (streets.x_coordinate - #{x})*(streets.x_coordinate - #{x}) + (streets.y_coordinate - #{y})*(streets.y_coordinate - #{y}) <= #{distance}*#{distance}
+        ]]>
+    </select>
+
     <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Street">
         UPDATE streets
         SET NAME        = #{name},

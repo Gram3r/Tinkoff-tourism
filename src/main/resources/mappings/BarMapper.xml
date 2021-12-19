@@ -27,6 +27,20 @@
         WHERE bars.name = #{name}
     </select>
 
+    <select id="findByDistance" resultMap="BarMap">
+        SELECT *
+        FROM bars
+        <![CDATA[
+        WHERE (bars.x_coordinate - #{x})*(bars.x_coordinate - #{x}) + (bars.y_coordinate - #{y})*(bars.y_coordinate - #{y}) <= #{distance}*#{distance}
+        ]]>
+    </select>
+
+    <select id="findByCocktailsForAdults" resultMap="BarMap">
+        SELECT *
+        FROM bars
+        WHERE bars.for_adults = #{forAdults}
+    </select>
+
     <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Bar">
         UPDATE bars
         SET NAME        = #{name},

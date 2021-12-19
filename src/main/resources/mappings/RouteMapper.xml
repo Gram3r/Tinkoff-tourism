@@ -5,31 +5,6 @@
 
 <mapper namespace="tinkoff.tourism.dao.RouteRepository">
 
-    <select id="getRouteByBudget" parameterType="tinkoff.tourism.controller.dto.RouteRequest" resultMap="SightMap">
-        <![CDATA[
-        SELECT *
-        FROM sights
-        WHERE sights.price <= #{budget}
-        ]]>
-    </select>
-
-    <select id="getRouteByCategories" parameterType="tinkoff.tourism.controller.dto.RouteRequest" resultMap="SightMap">
-        SELECT *
-        FROM sights
-        WHERE sights.type IN
-        <foreach item="item" index="index" collection="categories" open="(" separator="," close=")">
-            #{item}
-        </foreach>
-    </select>
-
-    <select id="getRouteByTime" parameterType="tinkoff.tourism.controller.dto.RouteRequest" resultMap="SightMap">
-        <![CDATA[
-        SELECT *
-        FROM sights
-        WHERE sights.open_time <= #{endTime} AND sights.close_time >= #{startTime}
-        ]]>
-    </select>
-
     <select id="getRoute" parameterType="tinkoff.tourism.controller.dto.RouteRequest" resultMap="SightMap">
         SELECT *
         FROM sights

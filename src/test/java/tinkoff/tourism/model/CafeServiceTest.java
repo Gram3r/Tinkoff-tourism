@@ -9,6 +9,8 @@ import tinkoff.tourism.model.sights.Cafe;
 import tinkoff.tourism.service.sights.CafeService;
 import tinkoff.tourism.service.sights.SightService;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @AutoConfigureMockMvc
@@ -28,19 +30,19 @@ public class CafeServiceTest extends AbstractTest {
     public void addCafeSuccess() {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeService.addSight(cafe);
-        cafe.setId(cafeService.findByName(cafe.getName()).getId());
+        cafe.setId(cafeService.findByName(cafe.getName()).get(0).getId());
 
-        assertEquals(cafe, cafeService.findByName(cafe.getName()));
+        assertEquals(cafe, cafeService.findByName(cafe.getName()).get(0));
     }
 
     @Test
     public void getCafeSuccess() {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeService.addSight(cafe);
-        cafe.setId(cafeService.findByName(cafe.getName()).getId());
+        cafe.setId(cafeService.findByName(cafe.getName()).get(0).getId());
 
         assertEquals(cafe, cafeService.findById(cafe.getId()));
-        assertEquals(cafe, cafeService.findByName(cafe.getName()));
+        assertEquals(cafe, cafeService.findByName(cafe.getName()).get(0));
     }
 
     @Test
@@ -48,14 +50,14 @@ public class CafeServiceTest extends AbstractTest {
         Cafe cafe = createCafe("Stolovaya 1");
 
         assertNull(cafeService.findById(cafe.getId()));
-        assertNull(cafeService.findByName(cafe.getName()));
+        assertEquals(List.of(), cafeService.findByName(cafe.getName()));
     }
 
     @Test
     public void updateCafeSuccess() {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeService.addSight(cafe);
-        cafe.setId(cafeService.findByName(cafe.getName()).getId());
+        cafe.setId(cafeService.findByName(cafe.getName()).get(0).getId());
         Cafe cafe2 = createCafe("Stolovaya 1");
         cafe2.setId(cafe.getId());
 
@@ -71,7 +73,7 @@ public class CafeServiceTest extends AbstractTest {
     public void DeleteCafeSuccess() {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeService.addSight(cafe);
-        cafe.setId(cafeService.findByName(cafe.getName()).getId());
+        cafe.setId(cafeService.findByName(cafe.getName()).get(0).getId());
 
         assertEquals(cafe, cafeService.findById(cafe.getId()));
 

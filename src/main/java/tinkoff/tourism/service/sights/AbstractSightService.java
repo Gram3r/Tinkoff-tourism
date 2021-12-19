@@ -37,8 +37,13 @@ public abstract class AbstractSightService<T extends Sight, R extends GenericRep
     }
 
     @Override
-    public T findByName(String name) {
+    public List<T> findByName(String name) {
         return repository.findByName(name);
+    }
+
+    @Override
+    public List<T> findByDistance(Double x, Double y, Double distance) {
+        return repository.findByDistance(x, y, distance);
     }
 
     @Override

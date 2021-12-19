@@ -27,6 +27,20 @@
         WHERE museums.name = #{name}
     </select>
 
+    <select id="findByDistance" resultMap="MuseumMap">
+        SELECT *
+        FROM museums
+        <![CDATA[
+        WHERE (museums.x_coordinate - #{x})*(museums.x_coordinate - #{x}) + (museums.y_coordinate - #{y})*(museums.y_coordinate - #{y}) <= #{distance}*#{distance}
+        ]]>
+    </select>
+
+    <select id="findByDiscountForChildren" resultMap="MuseumMap">
+        SELECT *
+        FROM museums
+        WHERE museums.discount_for_children = #{discountForChildren}
+    </select>
+
     <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Museum">
         UPDATE museums
         SET NAME        = #{name},
@@ -38,7 +52,7 @@
             OPEN_TIME = #{openTime},
             CLOSE_TIME = #{closeTime},
             PRICE = #{price},
-            DISCOUNTFORCHILDREN = #{discountForChildren}
+            DISCOUNT_FOR_CHILDREN = #{discountForChildren}
         WHERE ID = #{id}
     </update>
 

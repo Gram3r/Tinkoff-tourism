@@ -25,8 +25,18 @@ public abstract class AbstractPlaceController<T extends Sight, S extends Generic
         return service.findById(id);
     }
 
+    @GetMapping(value = "name", produces = APPLICATION_JSON_VALUE)
+    public List<T> getSightsByName(@RequestParam("name") String name) {
+        return service.findByName(name);
+    }
+
+    @GetMapping(value = "distance", produces = APPLICATION_JSON_VALUE)
+    public List<T> getSightsByDistance(@RequestParam("x") Double x, @RequestParam("y") Double y, @RequestParam("distance") Double distance) {
+        return service.findByDistance(x, y, distance);
+    }
+
     @GetMapping(value = "all", produces = APPLICATION_JSON_VALUE)
-    public List<T> getSights() {
+    public List<T> getAllSights() {
         return service.findAll();
     }
 

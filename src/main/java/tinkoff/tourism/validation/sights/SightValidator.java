@@ -25,14 +25,14 @@ public class SightValidator implements ConstraintValidator<SightConstraint, Sigh
         }
 
         return sight != null &&
-                !sight.getName().isBlank() &&
-                !sight.getType().isBlank() && enumTypes.contains(sight.getType().toUpperCase()) &&
-                !sight.getXCoordinate().isInfinite() && !sight.getXCoordinate().isNaN() &&
-                !sight.getYCoordinate().isInfinite() && !sight.getYCoordinate().isNaN() &&
+                sight.getName() != null && !sight.getName().isBlank() &&
+                sight.getType() != null &&!sight.getType().isBlank() && enumTypes.contains(sight.getType().toUpperCase()) &&
+                sight.getXCoordinate() != null && !sight.getXCoordinate().isInfinite() && !sight.getXCoordinate().isNaN() &&
+                sight.getYCoordinate() != null && !sight.getYCoordinate().isInfinite() && !sight.getYCoordinate().isNaN() &&
                 !sight.getDescription().isBlank() &&
                 (sight.getSiteLink() == null || validURL.matcher(sight.getSiteLink()).matches()) &&
-                validHours.matcher(sight.getOpenTime()).matches() &&
-                validHours.matcher(sight.getCloseTime()).matches() &&
+                sight.getOpenTime() != null && validHours.matcher(sight.getOpenTime()).matches() &&
+                sight.getCloseTime() != null && validHours.matcher(sight.getCloseTime()).matches() &&
                 sight.getOpenTime().compareTo(sight.getCloseTime()) < 0;
     }
 }

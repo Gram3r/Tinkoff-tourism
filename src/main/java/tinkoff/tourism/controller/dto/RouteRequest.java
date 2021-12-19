@@ -13,16 +13,12 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RouteRequest {
 
-    @NonNull
     List<String> categories;
 
-    @NonNull
     String startTime;
 
-    @NonNull
     String endTime;
 
-    @NonNull
     @PositiveOrZero
     Integer budget;
 }

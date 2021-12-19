@@ -76,7 +76,7 @@ public class AuthorizationTest extends AbstractTest {
     public void getCafeUserSuccess() throws Exception {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         mockMvc.perform(
                         get("/cafe")
@@ -99,7 +99,7 @@ public class AuthorizationTest extends AbstractTest {
                 )
                 .andExpect(status().is2xxSuccessful());
 
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
         assertEquals(cafe, cafeRepository.findById(cafe.getId()));
     }
 
@@ -107,7 +107,7 @@ public class AuthorizationTest extends AbstractTest {
     public void getCafeAdminSuccess() throws Exception {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         mockMvc.perform(
                         get("/cafe")

@@ -46,7 +46,7 @@ public class CafeControllerTest extends AbstractTest {
                 )
                 .andExpect(status().is2xxSuccessful());
 
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
         assertEquals(cafe, cafeRepository.findById(cafe.getId()));
     }
 
@@ -60,7 +60,7 @@ public class CafeControllerTest extends AbstractTest {
                 )
                 .andExpect(status().is2xxSuccessful());
 
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
         assertEquals(cafe, cafeRepository.findById(cafe.getId()));
     }
 
@@ -68,7 +68,7 @@ public class CafeControllerTest extends AbstractTest {
     public void getCafeSuccess() throws Exception {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         mockMvc.perform(
                         get("/cafe")
@@ -84,7 +84,7 @@ public class CafeControllerTest extends AbstractTest {
         Cafe cafe = createCafe("Stolovaya 1");
         mockMvc.perform(
                         get("/cafe")
-                                .param("id", cafe.getId().toString()))
+                                .param("id", "1"))
                 .andExpect(jsonPath("$").doesNotExist());
     }
 
@@ -92,7 +92,7 @@ public class CafeControllerTest extends AbstractTest {
     public void putCafeSuccess() throws Exception {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         Cafe cafe2 = createCafe("Stolovaya 2");
         cafe2.setId(cafe.getId());
@@ -113,7 +113,7 @@ public class CafeControllerTest extends AbstractTest {
     public void deleteCafeSuccess() throws Exception {
         Cafe cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         mockMvc.perform(
                         delete("/cafe")
@@ -125,7 +125,6 @@ public class CafeControllerTest extends AbstractTest {
 
     private Cafe createCafe(String name) {
         return Cafe.builder()
-                .id(1L)
                 .name(name)
                 .type("cafe")
                 .xCoordinate(5.6)

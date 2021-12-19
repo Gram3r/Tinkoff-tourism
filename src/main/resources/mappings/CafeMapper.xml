@@ -27,6 +27,20 @@
         WHERE cafes.name = #{name}
     </select>
 
+    <select id="findByDistance" resultMap="CafeMap">
+        SELECT *
+        FROM cafes
+        <![CDATA[
+        WHERE (cafes.x_coordinate - #{x})*(cafes.x_coordinate - #{x}) + (cafes.y_coordinate - #{y})*(cafes.y_coordinate - #{y}) <= #{distance}*#{distance}
+        ]]>
+    </select>
+
+    <select id="findByTypeOfFood" resultMap="CafeMap">
+        SELECT *
+        FROM cafes
+        WHERE cafes.food_type = #{foodType}
+    </select>
+
     <update id="updateSight" parameterType="tinkoff.tourism.model.sights.Cafe">
         UPDATE cafes
         SET NAME        = #{name},

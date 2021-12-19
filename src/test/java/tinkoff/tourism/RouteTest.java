@@ -44,11 +44,11 @@ public class RouteTest extends AbstractTest {
     public void startDb() {
         cafe = createCafe("Stolovaya 1");
         cafeRepository.addSight(cafe);
-        cafe.setId(cafeRepository.findByName(cafe.getName()).getId());
+        cafe.setId(cafeRepository.findByName(cafe.getName()).get(0).getId());
 
         museum = createMuseum("Hermitage");
         museumRepository.addSight(museum);
-        museum.setId(museumRepository.findByName(museum.getName()).getId());
+        museum.setId(museumRepository.findByName(museum.getName()).get(0).getId());
     }
 
     @AfterAll

@@ -13,11 +13,17 @@ public interface GenericPlaceController<T extends Sight> {
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     void addSight(@RequestBody @Valid T sight);
 
+    @GetMapping(value = "all", produces = APPLICATION_JSON_VALUE)
+    List<T> getAllSights();
+
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     T getSight(@RequestParam("id") Long id);
 
-    @GetMapping(value = "all", produces = APPLICATION_JSON_VALUE)
-    List<T> getSights();
+    @GetMapping(value = "name", produces = APPLICATION_JSON_VALUE)
+    List<T> getSightsByName(@RequestParam("name") String name);
+
+    @GetMapping(value = "distance", produces = APPLICATION_JSON_VALUE)
+    List<T> getSightsByDistance(@RequestParam("x") Double x, @RequestParam("y") Double y, @RequestParam("distance") Double distance);
 
     @PutMapping(consumes = APPLICATION_JSON_VALUE)
     void updateSight(@RequestBody @Valid T sight);
