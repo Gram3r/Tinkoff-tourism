@@ -5,7 +5,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 import tinkoff.tourism.validation.sights.SightConstraint;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -23,8 +22,8 @@ public class Sight {
     String name;
     @NotBlank
     String type;
-    Double xCoordinate;
-    Double yCoordinate;
+    Double coordinateX;
+    Double coordinateY;
     String description;
     String siteLink;
     String openTime;
