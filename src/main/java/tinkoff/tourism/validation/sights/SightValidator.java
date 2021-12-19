@@ -5,7 +5,6 @@ import tinkoff.tourism.model.sights.Sight;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.net.Proxy;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -27,8 +26,8 @@ public class SightValidator implements ConstraintValidator<SightConstraint, Sigh
         return sight != null &&
                 sight.getName() != null && !sight.getName().isBlank() &&
                 sight.getType() != null &&!sight.getType().isBlank() && enumTypes.contains(sight.getType().toUpperCase()) &&
-                sight.getXCoordinate() != null && !sight.getXCoordinate().isInfinite() && !sight.getXCoordinate().isNaN() &&
-                sight.getYCoordinate() != null && !sight.getYCoordinate().isInfinite() && !sight.getYCoordinate().isNaN() &&
+                sight.getCoordinateX() != null && !sight.getCoordinateX().isInfinite() && !sight.getCoordinateX().isNaN() &&
+                sight.getCoordinateY() != null && !sight.getCoordinateY().isInfinite() && !sight.getCoordinateY().isNaN() &&
                 !sight.getDescription().isBlank() &&
                 (sight.getSiteLink() == null || validURL.matcher(sight.getSiteLink()).matches()) &&
                 sight.getOpenTime() != null && validHours.matcher(sight.getOpenTime()).matches() &&

@@ -34,8 +34,8 @@
         UPDATE sights
         SET NAME        = #{name},
             TYPE        = #{type},
-            X_COORDINATE = #{xCoordinate},
-            Y_COORDINATE = #{yCoordinate},
+            X_COORDINATE = #{coordinateX},
+            Y_COORDINATE = #{coordinateY},
             DESCRIPTION = #{description},
             SITE_LINK = #{siteLink},
             OPEN_TIME = #{openTime},
@@ -59,13 +59,12 @@
         <result property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="type" column="type"/>
-        <result property="xCoordinate" column="x_coordinate"/>
-        <result property="yCoordinate" column="y_coordinate"/>
+        <result property="coordinateX" column="x_coordinate"/>
+        <result property="coordinateY" column="y_coordinate"/>
         <result property="description" column="description"/>
         <result property="siteLink" column="site_link"/>
         <result property="openTime" column="open_time"/>
         <result property="closeTime" column="close_time"/>
         <result property="price" column="price"/>
     </resultMap>
-
 </mapper>
