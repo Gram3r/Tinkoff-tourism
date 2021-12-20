@@ -27,7 +27,7 @@ build-job:
       - target/*.jar
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
-      when: manual
+      when: always
 
 deploy-job:
   image: docker:latest
@@ -43,4 +43,4 @@ deploy-job:
       curl -X PATCH https://api.heroku.com/apps/tourism-tinkoff/formation --header "Content-Type: application/json" --header "Accept: application/vnd.heroku+json; version=3.docker-releases" --header "Authorization: Bearer 8afb0fa9-72f4-411d-9398-dfa472a79ffb" --data '{ "updates": [ { "type": "web", "docker_image": "'$(cat imageid.txt)'" } ] }'
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
-      when: manual
+      when: always
