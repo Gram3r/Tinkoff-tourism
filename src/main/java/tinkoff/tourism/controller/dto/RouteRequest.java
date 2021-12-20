@@ -9,14 +9,13 @@ import java.util.List;
 
 @Data
 @SuperBuilder
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RouteRequest {
 
     List<String> categories;
-
     String startTime;
-
     String endTime;
 
     @PositiveOrZero
