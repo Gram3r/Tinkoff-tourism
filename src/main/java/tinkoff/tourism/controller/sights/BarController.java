@@ -19,5 +19,4 @@ public class BarController extends AbstractPlaceController<Bar, BarService> {
     public List<Bar> getBarsByCocktailsForAdults(@RequestParam("forAdults") Boolean forAdults) {
         return service.findByCocktailsForAdults(forAdults);
     }
-
 }

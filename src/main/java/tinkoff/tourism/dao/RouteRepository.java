@@ -7,6 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface RouteRepository {
-
     List<Sight> getRoute(RouteRequest request);
 }

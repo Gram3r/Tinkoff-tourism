@@ -15,7 +15,8 @@ public class RouteRequestValidator implements ConstraintValidator<RouteRequestCo
     @Override
     public boolean isValid(RouteRequest route, ConstraintValidatorContext constraintValidatorContext) {
 
-        return route.getCategories() != null && route.getCategories().stream().allMatch(Objects::nonNull) &&
+        return route != null &&
+                route.getCategories() != null && route.getCategories().stream().allMatch(Objects::nonNull) &&
                 (route.getStartTime() == null || validHours.matcher(route.getStartTime()).matches()) &&
                 (route.getEndTime() == null || validHours.matcher(route.getEndTime()).matches());
     }
