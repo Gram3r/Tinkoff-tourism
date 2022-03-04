@@ -2,7 +2,7 @@
 
 Designed and implemented an application in which you can choose the leisure categories you are interested in, budget, time of visit and get a recommended route from activities in response.
 
-### 1. Designed a data model of sights:
+### *1. Designed a data model of sights:*
 
 ##### The sights have:
 
