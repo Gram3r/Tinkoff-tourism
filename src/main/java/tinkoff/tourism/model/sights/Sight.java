@@ -18,9 +18,7 @@ import javax.validation.constraints.PositiveOrZero;
 
 public class Sight {
     Long id;
-    @NotBlank
     String name;
-    @NotBlank
     String type;
     Double coordinateX;
     Double coordinateY;
