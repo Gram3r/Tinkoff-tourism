@@ -16,7 +16,7 @@ Designed and implemented an application in which you can choose the leisure cate
 
 ### *2. Implemented API for model management (CRUD), necessary validations.*
 
-### *3.Added a role model:*
+### *3. Added a role model:*
 * Only a user with the ADMIN role can edit sights (PUT, POST, DELETE requests). 
 * Any user can view sights (GET requests). 
 * Added two users - with and without the ADMIN role.
@@ -27,7 +27,7 @@ Designed and implemented an application in which you can choose the leisure cate
 * The service selects the recommended route (list) from the sights.
 * The sights are in order of visit by time.
 
-### *5.Wrote junit tests:*
+### *5. Wrote junit tests:*
 
 * Tests for sights validation.
 * Tests for repositories, services, controllers.
